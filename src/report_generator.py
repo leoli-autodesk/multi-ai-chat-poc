@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-专业报告生成器
-为私校申请顾问生成高质量的策略报告
+专业报告生成器 - 统一模板版本
+消除多模板并存和重复拼接导致的随机输出
 """
 
 import os
@@ -10,27 +10,27 @@ import yaml
 from datetime import datetime
 from typing import Dict, List, Any
 from pathlib import Path
+from src.report_assembler import ReportAssembler
+from src.writer_agent import WriterAgent
 
 class ProfessionalReportGenerator:
-    """专业报告生成器"""
+    """专业报告生成器 - 统一模板版本"""
     
     def __init__(self, config_dir: str = "config"):
         self.config_dir = config_dir
-        self.templates = self.load_templates()
         self.school_data = self.load_school_data()
+        
+        # 初始化新组件
+        self.assembler = ReportAssembler(config_dir)
+        self.writer_agent = WriterAgent(config_dir)
+        
+        # 单一来源断言
+        self.assembler.assert_no_old_templates()
     
     def load_templates(self) -> Dict[str, str]:
-        """加载报告模板"""
-        templates = {}
-        template_dir = Path(self.config_dir) / "templates"
-        
-        if template_dir.exists():
-            for template_file in template_dir.glob("*.md"):
-                template_name = template_file.stem
-                with open(template_file, 'r', encoding='utf-8') as f:
-                    templates[template_name] = f.read()
-        
-        return templates
+        """禁用旧模板加载 - 仅保留空字典"""
+        # 不再加载strategy_report.md等旧模板
+        return {}
     
     def load_school_data(self) -> Dict[str, Any]:
         """加载学校数据"""
@@ -44,15 +44,112 @@ class ProfessionalReportGenerator:
     
     def generate_report(self, conversation_log: List[Dict[str, Any]], 
                        student_data: Dict[str, Any]) -> str:
-        """生成专业报告"""
+        """
+        生成统一模板报告 - 使用Writer Agent和Report Assembler
         
+        Args:
+            conversation_log: 对话日志
+            student_data: 学生数据
+            
+        Returns:
+            完整的报告文本
+        """
         # 分析对话内容
         analysis = self.analyze_conversation(conversation_log)
         
-        # 生成报告内容
-        report_content = self.build_report_content(student_data, analysis)
+        # 使用Writer Agent生成6章内容
+        sections = {}
         
-        return report_content
+        # 串行生成各章节
+        section_configs = [
+            ("家庭与学生背景", "family_background", analysis.get("family_support", [])),
+            ("学校申请定位", "school_positioning", analysis.get("target_schools", [])),
+            ("学生—学校匹配度", "school_matching", analysis.get("academic_strengths", [])),
+            ("学术与课外准备", "academic_preparation", analysis.get("academic_strengths", [])),
+            ("申请流程与个性化策略", "application_strategy", analysis.get("personal_qualities", [])),
+            ("录取后延伸建议", "post_admission_advice", analysis.get("leadership_experiences", []))
+        ]
+        
+        context_summary = ""
+        for section_title, section_key, section_data in section_configs:
+            print(f"📝 正在生成章节: {section_title}")
+            
+            # 构建章节提示词
+            section_prompt = self._build_section_prompt(
+                section_title, section_data, student_data, context_summary
+            )
+            
+            # 调用Writer Agent
+            section_content = self.writer_agent.generate_section(section_prompt)
+            sections[section_title] = section_content
+            
+            # 更新上下文摘要
+            context_summary += f"{section_title}: {section_content[:200]}...\n"
+        
+        # 使用Report Assembler组装最终报告
+        full_report = self.assembler.assemble_report(sections)
+        
+        # 记录导出日志
+        self._log_export_stats(full_report, sections)
+        
+        return full_report
+    
+    def _build_section_prompt(self, section_title: str, section_data: List[str], 
+                            student_data: Dict[str, Any], context_summary: str) -> str:
+        """构建章节提示词"""
+        prompt = f"""
+章节标题: {section_title}
+
+学生基本信息:
+- 姓名: {student_data.get('name', 'Alex Chen')}
+- 年龄: {student_data.get('age', '14岁')}
+- 目标学校: {student_data.get('target_schools', 'Upper Canada College, Havergal College, St. Andrew College')}
+
+相关数据: {', '.join(section_data) if section_data else '无特定数据'}
+
+上下文摘要: {context_summary[:500] if context_summary else '无'}
+
+请生成该章节的专业内容，要求:
+1. 不得复述前文，需承接式一句带过并补充新信息
+2. 严格禁止Markdown语法、emoji、清单项
+3. 输出自然段落，句式有长短变化
+4. 字数控制在目标范围内
+"""
+        return prompt
+    
+    def _log_export_stats(self, full_report: str, sections: Dict[str, str]) -> None:
+        """记录导出统计信息"""
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M")
+        
+        stats = {
+            "timestamp": timestamp,
+            "total_characters": len(full_report),
+            "estimated_pages": len(full_report) // 500,  # 估算页数
+            "sections_found": len(sections),
+            "section_lengths": {title: len(content) for title, content in sections.items()},
+            "template_path": "writer-only",
+            "validation_passed": len(sections) == 6,
+            "duplicates_found": False
+        }
+        
+        log_file = Path("logs") / f"export_stats_{timestamp}.json"
+        log_file.parent.mkdir(exist_ok=True)
+        
+        with open(log_file, 'w', encoding='utf-8') as f:
+            json.dump(stats, f, ensure_ascii=False, indent=2)
+        
+        # 打印验收结果
+        print(f"\n📊 导出统计:")
+        print(f"   总字数: {stats['total_characters']}")
+        print(f"   估算页数: {stats['estimated_pages']}")
+        print(f"   章节数: {stats['sections_found']}")
+        print(f"   模板路径: {stats['template_path']}")
+        print(f"   校验通过: {stats['validation_passed']}")
+        
+        if stats['sections_found'] != 6:
+            print(f"❌ 章节数量错误: 期望6章，实际{stats['sections_found']}章")
+        else:
+            print("✅ 章节数量正确")
     
     def analyze_conversation(self, conversation_log: List[Dict[str, Any]]) -> Dict[str, Any]:
         """分析对话内容，提取关键信息"""

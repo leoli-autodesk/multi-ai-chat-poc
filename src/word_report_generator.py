@@ -154,19 +154,25 @@ class WordReportGenerator:
     
     def generate_word_report(self, report_content: str, student_data: Dict[str, Any], 
                            output_path: str) -> str:
-        """生成Word报告"""
+        """生成Word报告 - 使用reference.docx作为样式模板"""
         try:
-            # 创建文档
-            self.create_document()
+            # 使用reference.docx作为基础模板
+            reference_path = Path("config/templates/reference.docx")
+            if reference_path.exists():
+                self.doc = Document(str(reference_path))
+                print("✅ 使用reference.docx作为样式模板")
+            else:
+                self.create_document()
+                print("⚠️ reference.docx不存在，使用默认样式")
             
-            # 解析Markdown内容
-            lines = report_content.split('\n')
+            # 清空现有内容（保留样式）
+            self.doc._body.clear_content()
             
             # 添加标题
-            self.add_title("🎯 私校申请策略报告")
+            self.add_title("私校申请策略报告")
             
             # 添加学生信息
-            self.add_heading1("📋 学生概况")
+            self.add_heading1("学生概况")
             target_schools = student_data.get('target_schools', 'Upper Canada College, Havergal College, St. Andrew\'s College')
             student_info = [
                 f"姓名: {student_data.get('name', 'Alex Chen')}",
@@ -178,8 +184,8 @@ class WordReportGenerator:
             
             self.add_section_divider()
             
-            # 解析并添加报告内容
-            self.parse_markdown_content(lines)
+            # 解析并添加报告内容（纯文本，无Markdown）
+            self.parse_plain_content(report_content)
             
             # 添加页脚信息
             self.add_section_divider()
@@ -193,6 +199,24 @@ class WordReportGenerator:
         except Exception as e:
             print(f"❌ Word报告生成失败: {e}")
             return None
+    
+    def parse_plain_content(self, content: str):
+        """解析纯文本内容并添加到Word文档"""
+        lines = content.split('\n')
+        
+        for line in lines:
+            line = line.strip()
+            
+            if not line:
+                continue
+            
+            # 检查是否是章节标题
+            if line in ["家庭与学生背景", "学校申请定位", "学生—学校匹配度", 
+                       "学术与课外准备", "申请流程与个性化策略", "录取后延伸建议"]:
+                self.add_heading1(line)
+            else:
+                # 普通段落
+                self.add_paragraph(line)
     
     def parse_markdown_content(self, lines: List[str]):
         """解析Markdown内容并添加到Word文档"""
