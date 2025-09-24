@@ -1,0 +1,328 @@
+{
+  "student": {
+    "name": "{{student_name}}",
+    "age": "{{age}}",
+    "grade": "{{grade}}",
+    "gpa": "{{gpa}}",
+    "test_scores": "{{test_scores}}",
+    "academic_strengths": "{{academic_strengths}}",
+    "competition_achievements": "{{competition_achievements}}",
+    "leadership_positions": "{{leadership_positions}}",
+    "project_experiences": "{{project_experiences}}",
+    "teamwork_examples": "{{teamwork_examples}}",
+    "impact_metrics": "{{impact_metrics}}",
+    "innovation_examples": "{{innovation_examples}}",
+    "responsibility_examples": "{{responsibility_examples}}",
+    "learning_ability": "{{learning_ability}}",
+    "adaptability": "{{adaptability}}",
+    "academic_level": "{{academic_level}}",
+    "maintain_strengths": "{{maintain_strengths}}",
+    "improvement_areas": "{{improvement_areas}}",
+    "test_preparation": "{{test_preparation}}",
+    "study_plan": "{{study_plan}}",
+    "deepen_existing": "{{deepen_existing}}",
+    "innovative_projects": "{{innovative_projects}}",
+    "collaboration_skills": "{{collaboration_skills}}",
+    "quantify_results": "{{quantify_results}}",
+    "expand_influence": "{{expand_influence}}",
+    "long_term_projects": "{{long_term_projects}}",
+    "record_results": "{{record_results}}",
+    "gain_recognition": "{{gain_recognition}}",
+    "professional_expertise": "{{professional_expertise}}",
+    "global_perspective": "{{global_perspective}}",
+    "innovative_spirit": "{{innovative_spirit}}",
+    "holistic_development": "{{holistic_development}}"
+  },
+  "family": {
+    "education_values": "{{education_values}}",
+    "goals": "{{family_goals}}",
+    "culture": "{{family_culture}}",
+    "support_level": "{{family_support_level}}",
+    "expectations": "{{family_expectations}}",
+    "resources": "{{family_resources}}"
+  },
+  "positioning": {
+    "parent_criteria": ["学术", "全人教育", "体育", "艺术", "通勤", "寄宿", "国际化", "传统价值观"],
+    "resource_scan_summary": "{{resource_scan_summary}}",
+    "school_type_preference": "{{school_type_preference}}",
+    "location_preference": "{{location_preference}}",
+    "budget_range": "{{budget_range}}"
+  },
+  "target_schools": [
+    {
+      "name": "Upper Canada College",
+      "facts": {
+        "class_size": "{{class_size_ucc}}",
+        "student_teacher_ratio": "{{ratio_ucc}}",
+        "signature_programs": ["{{program_ucc_1}}", "{{program_ucc_2}}", "{{program_ucc_3}}"],
+        "tuition": "{{tuition_ucc}}",
+        "location": "{{location_ucc}}",
+        "type": "{{type_ucc}}"
+      },
+      "scores": {
+        "academic": 0,
+        "activities": 0,
+        "culture": 0,
+        "personality": 0
+      },
+      "weights": {
+        "academic": 0.35,
+        "activities": 0.25,
+        "culture": 0.2,
+        "personality": 0.2
+      },
+      "match_percentage": "{{match_percentage_ucc}}",
+      "advantages": ["{{advantage_ucc_1}}", "{{advantage_ucc_2}}", "{{advantage_ucc_3}}"],
+      "strategies": ["{{strategy_ucc_1}}", "{{strategy_ucc_2}}", "{{strategy_ucc_3}}"],
+      "rationale": "{{rationale_ucc}}",
+      "challenges": ["{{challenge_ucc_1}}", "{{challenge_ucc_2}}"],
+      "interview_tips": "{{interview_tips_ucc}}"
+    },
+    {
+      "name": "Havergal College",
+      "facts": {
+        "class_size": "{{class_size_hc}}",
+        "student_teacher_ratio": "{{ratio_hc}}",
+        "signature_programs": ["{{program_hc_1}}", "{{program_hc_2}}", "{{program_hc_3}}"],
+        "tuition": "{{tuition_hc}}",
+        "location": "{{location_hc}}",
+        "type": "{{type_hc}}"
+      },
+      "scores": {
+        "academic": 0,
+        "activities": 0,
+        "culture": 0,
+        "personality": 0
+      },
+      "weights": {
+        "academic": 0.35,
+        "activities": 0.25,
+        "culture": 0.2,
+        "personality": 0.2
+      },
+      "match_percentage": "{{match_percentage_hc}}",
+      "advantages": ["{{advantage_hc_1}}", "{{advantage_hc_2}}", "{{advantage_hc_3}}"],
+      "strategies": ["{{strategy_hc_1}}", "{{strategy_hc_2}}", "{{strategy_hc_3}}"],
+      "rationale": "{{rationale_hc}}",
+      "challenges": ["{{challenge_hc_1}}", "{{challenge_hc_2}}"],
+      "interview_tips": "{{interview_tips_hc}}"
+    },
+    {
+      "name": "St. Andrew's College",
+      "facts": {
+        "class_size": "{{class_size_sac}}",
+        "student_teacher_ratio": "{{ratio_sac}}",
+        "signature_programs": ["{{program_sac_1}}", "{{program_sac_2}}", "{{program_sac_3}}"],
+        "tuition": "{{tuition_sac}}",
+        "location": "{{location_sac}}",
+        "type": "{{type_sac}}"
+      },
+      "scores": {
+        "academic": 0,
+        "activities": 0,
+        "culture": 0,
+        "personality": 0
+      },
+      "weights": {
+        "academic": 0.35,
+        "activities": 0.25,
+        "culture": 0.2,
+        "personality": 0.2
+      },
+      "match_percentage": "{{match_percentage_sac}}",
+      "advantages": ["{{advantage_sac_1}}", "{{advantage_sac_2}}", "{{advantage_sac_3}}"],
+      "strategies": ["{{strategy_sac_1}}", "{{strategy_sac_2}}", "{{strategy_sac_3}}"],
+      "rationale": "{{rationale_sac}}",
+      "challenges": ["{{challenge_sac_1}}", "{{challenge_sac_2}}"],
+      "interview_tips": "{{interview_tips_sac}}"
+    }
+  ],
+  "timeline": {
+    "deadlines": [
+      "{{deadline_1}}",
+      "{{deadline_2}}",
+      "{{deadline_3}}"
+    ],
+    "milestones": [
+      "{{milestone_1}}",
+      "{{milestone_2}}",
+      "{{milestone_3}}"
+    ],
+    "application_phases": {
+      "phase_1": "{{phase_1_name}}",
+      "phase_2": "{{phase_2_name}}",
+      "phase_3": "{{phase_3_name}}"
+    }
+  },
+  "plans": {
+    "short_term_goals": [
+      {
+        "category": "{{short_term_category_1}}",
+        "description": "{{short_term_desc_1}}",
+        "owner": "{{short_term_owner_1}}",
+        "due_date": "{{short_term_due_1}}",
+        "evidence": "{{short_term_evidence_1}}"
+      },
+      {
+        "category": "{{short_term_category_2}}",
+        "description": "{{short_term_desc_2}}",
+        "owner": "{{short_term_owner_2}}",
+        "due_date": "{{short_term_due_2}}",
+        "evidence": "{{short_term_evidence_2}}"
+      },
+      {
+        "category": "{{short_term_category_3}}",
+        "description": "{{short_term_desc_3}}",
+        "owner": "{{short_term_owner_3}}",
+        "due_date": "{{short_term_due_3}}",
+        "evidence": "{{short_term_evidence_3}}"
+      }
+    ],
+    "medium_term_goals": [
+      {
+        "category": "{{medium_term_category_1}}",
+        "description": "{{medium_term_desc_1}}",
+        "owner": "{{medium_term_owner_1}}",
+        "due_date": "{{medium_term_due_1}}",
+        "evidence": "{{medium_term_evidence_1}}"
+      },
+      {
+        "category": "{{medium_term_category_2}}",
+        "description": "{{medium_term_desc_2}}",
+        "owner": "{{medium_term_owner_2}}",
+        "due_date": "{{medium_term_due_2}}",
+        "evidence": "{{medium_term_evidence_2}}"
+      },
+      {
+        "category": "{{medium_term_category_3}}",
+        "description": "{{medium_term_desc_3}}",
+        "owner": "{{medium_term_owner_3}}",
+        "due_date": "{{medium_term_due_3}}",
+        "evidence": "{{medium_term_evidence_3}}"
+      }
+    ],
+    "long_term_goals": [
+      {
+        "category": "{{long_term_category_1}}",
+        "description": "{{long_term_desc_1}}",
+        "owner": "{{long_term_owner_1}}",
+        "due_date": "{{long_term_due_1}}",
+        "evidence": "{{long_term_evidence_1}}"
+      },
+      {
+        "category": "{{long_term_category_2}}",
+        "description": "{{long_term_desc_2}}",
+        "owner": "{{long_term_owner_2}}",
+        "due_date": "{{long_term_due_2}}",
+        "evidence": "{{long_term_evidence_2}}"
+      },
+      {
+        "category": "{{long_term_category_3}}",
+        "description": "{{long_term_desc_3}}",
+        "owner": "{{long_term_owner_3}}",
+        "due_date": "{{long_term_due_3}}",
+        "evidence": "{{long_term_evidence_3}}"
+      }
+    ]
+  },
+  "risks": {
+    "backup_plans": ["{{backup_plan_1}}", "{{backup_plan_2}}", "{{backup_plan_3}}"],
+    "time_management": "{{time_management}}",
+    "material_preparation": "{{material_preparation}}",
+    "interview_preparation": "{{interview_preparation}}",
+    "academic_risks": ["{{academic_risk_1}}", "{{academic_risk_2}}"],
+    "application_risks": ["{{application_risk_1}}", "{{application_risk_2}}"],
+    "mitigation_strategies": ["{{mitigation_1}}", "{{mitigation_2}}", "{{mitigation_3}}"]
+  },
+  "branding": {
+    "differentiation_strategy": "{{differentiation_strategy}}",
+    "storytelling_approach": "{{storytelling_approach}}",
+    "quantification_method": "{{quantification_method}}",
+    "future_vision": "{{future_vision}}",
+    "unique_selling_points": ["{{usp_1}}", "{{usp_2}}", "{{usp_3}}"],
+    "value_proposition": "{{value_proposition}}",
+    "competitive_advantages": ["{{competitive_adv_1}}", "{{competitive_adv_2}}", "{{competitive_adv_3}}"]
+  },
+  "academic_preparation": {
+    "subject_strengthening": {
+      "math": "{{math_strengthening}}",
+      "english": "{{english_strengthening}}",
+      "science": "{{science_strengthening}}",
+      "social_studies": "{{social_studies_strengthening}}"
+    },
+    "language_improvement": {
+      "reading": "{{reading_improvement}}",
+      "writing": "{{writing_improvement}}",
+      "speaking": "{{speaking_improvement}}",
+      "listening": "{{listening_improvement}}"
+    },
+    "test_preparation": {
+      "ssat": "{{ssat_preparation}}",
+      "isee": "{{isee_preparation}}",
+      "school_tests": "{{school_tests_preparation}}"
+    }
+  },
+  "extracurricular_preparation": {
+    "competitions": ["{{competition_1}}", "{{competition_2}}", "{{competition_3}}"],
+    "portfolio_projects": ["{{portfolio_1}}", "{{portfolio_2}}", "{{portfolio_3}}"],
+    "volunteer_work": ["{{volunteer_1}}", "{{volunteer_2}}", "{{volunteer_3}}"],
+    "community_service": "{{community_service}}",
+    "leadership_development": "{{leadership_development}}"
+  },
+  "application_strategy": {
+    "essay_themes": ["{{essay_theme_1}}", "{{essay_theme_2}}", "{{essay_theme_3}}"],
+    "recommendation_strategy": "{{recommendation_strategy}}",
+    "interview_preparation": {
+      "student_interview": "{{student_interview_prep}}",
+      "parent_interview": "{{parent_interview_prep}}",
+      "mock_interviews": "{{mock_interviews}}"
+    },
+    "application_timeline": "{{application_timeline}}"
+  },
+  "post_admission": {
+    "offer_comparison": "{{offer_comparison}}",
+    "school_selection": "{{school_selection}}",
+    "transition_preparation": "{{transition_preparation}}",
+    "academic_planning": "{{academic_planning}}",
+    "long_term_development": "{{long_term_development}}"
+  },
+  "report_meta": {
+    "report_date": "{{report_date}}",
+    "consultant": "私校申请专家团队",
+    "version": "{{report_version}}",
+    "page_count": "{{page_count}}",
+    "word_count": "{{word_count}}",
+    "generation_time": "{{generation_time}}"
+  },
+  "matching_analysis": {
+    "weights": {
+      "academic": 0.35,
+      "activities": 0.25,
+      "culture": 0.2,
+      "personality": 0.2
+    },
+    "scoring_criteria": {
+      "academic": "课程难度、语言门槛、竞赛承接",
+      "activities": "体育/音乐/艺术/社团资源",
+      "culture": "学校文化与家庭价值观一致性",
+      "personality": "学生个性与校园氛围适配"
+    },
+    "top_recommendations": {
+      "top1": {
+        "name": "{{top1_name}}",
+        "match_percentage": "{{top1_match_percentage}}",
+        "reason": "{{top1_reason}}"
+      },
+      "top2": {
+        "name": "{{top2_name}}",
+        "match_percentage": "{{top2_match_percentage}}",
+        "reason": "{{top2_reason}}"
+      },
+      "top3": {
+        "name": "{{top3_name}}",
+        "match_percentage": "{{top3_match_percentage}}",
+        "reason": "{{top3_reason}}"
+      }
+    }
+  }
+}

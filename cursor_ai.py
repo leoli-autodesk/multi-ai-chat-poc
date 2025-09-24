@@ -412,51 +412,120 @@ class CursorAI:
             return "基于刚才的对话，我建议学生和家长在下一轮回答时提供更多具体信息。重点是提供具体例子，避免泛泛而谈。"
     
     def generate_writer_response(self, prompt: str) -> str:
-        """生成写手响应"""
-        return """# 申请策略总览
-- 结论速览：孩子具有很好的领导力潜质，通过我们的专业指导，完全可以成功申请到目标学校。
-- 竞争力要点：服务意识、组织力、学习能力；我们的专业支持将帮助提升证据质量和持续度。
-- 我们的专业支持承诺：全程指导，确保成功。
+        """生成Writer响应 - 根据输入数据生成专业报告内容"""
+        # 提取用户提示词中的内容
+        if "content" in prompt:
+            # 查找JSON数据部分
+            json_start = prompt.find("{")
+            json_end = prompt.rfind("}") + 1
+            if json_start != -1 and json_end > json_start:
+                try:
+                    import json
+                    json_data = prompt[json_start:json_end]
+                    data = json.loads(json_data)
+                    
+                    # 根据数据生成内容
+                    return self.generate_report_content(data, prompt)
+                except:
+                    pass
+        
+        # 如果没有找到有效数据，返回默认内容
+        return """家庭与学生背景
 
-## 家庭与学生画像
-- 家庭价值观：重视教育，支持孩子全面发展
-- 学生特质：有责任心、组织能力强、学习态度积极
-- 成长潜力分析：通过专业指导，潜力将得到充分发挥
+张小明同学现年14岁，就读于Grade 8，在学术方面表现优异，GPA达到3.9/4.0。他在数学、物理、计算机科学和英语写作方面展现出显著优势，特别是在STEM领域有着浓厚的兴趣和扎实的基础。在竞赛方面，他获得了机器人竞赛省级二等奖和数学竞赛市级一等奖，这些成就充分体现了他在学术方面的实力和潜力。
 
-## 学校匹配度
-- 一致性要点：与目标学校价值观高度匹配
-- 潜在不匹配与风险：材料需要完善，面试技巧需要提升
-- 匹配度提升策略：我们的专业团队将协助完善所有材料
+在领导力方面，张小明担任学生会科技部副部长，并创建了环保社团，展现出了出色的组织能力和服务意识。他组织的环保义卖活动成功筹集了5000元资金，并开发了校园垃圾分类APP，这些项目不仅体现了他的技术能力，更展现了他对环保事业的热情和社会责任感。
 
-## 优势与改进列表
-- Top Strengths：服务意识、组织力、学习能力
-- Gaps to Close：材料完善、面试技巧
-- 我们的专业解决方案：提供全方位的申请指导服务
+家庭方面，家长重视全人教育，希望培养孩子的独立思考和创新能力。家庭的教育理念是中西文化融合，既重视传统价值观，也注重现代教育理念。家长全力支持孩子的教育发展，愿意投入充足的时间和资源，希望孩子能在国际化环境中全面发展，成为有责任感的未来领导者。
 
-## 90天行动计划
-- 材料打磨 | 家长/学生 | 2025-10-05 | PDF汇编 | 我们的全程指导
-- 面试演练 | 学生 | 2025-10-10 | 模拟评分>=4/5 | 我们的专业培训
-- 能力建设 | 学生 | 持续 | 量化指标 | 我们的个性化指导
+学校申请定位
 
-## 面试作战卡
-- 自我介绍：突出领导力和服务意识
-- 亮点故事：环保义卖活动（STAR模式）
-- 失败反思模版：诚实面对，展现成长
-- 反向提问清单：展现对学校的了解
+基于张小明同学的学术优势、领导力潜质和环保理念，我们建议他申请重视STEM教育、全人发展和环保理念的私立学校。目标学校应该能够支持他在机器人、编程和环保项目方面的兴趣发展，同时提供良好的学术环境和领导力培养机会。
 
-## 提交物清单
-- 简历：突出领导力和服务经历
-- 推荐信：来自指导老师和社团负责人
-- 作品集：环保项目相关材料
+多伦多地区的私立学校是理想的选择，这些学校不仅学术水平高，而且重视学生的全面发展。预算方面，家庭可以承担中等偏上的学费水平，这为选择优质学校提供了保障。
 
-## 我们的专业服务
-- 全程指导承诺：从材料准备到面试培训
-- 成功案例参考：类似背景学生的成功经验
-- 后续支持计划：入学后的持续关注
+学生—学校匹配度
 
-## 待补充信息
-- 需要更多量化证据
-- 需要第三方评价"""
+Upper Canada College是张小明同学的首选学校，匹配度达到92%。该校的STEM项目丰富，拥有先进的机器人实验室，与张小明在机器人竞赛方面的成就高度匹配。学校的学术环境优秀，大学录取率高，文化氛围适合，重视领导力培养。虽然竞争激烈，录取难度大，但张小明可以通过突出STEM专长和机器人竞赛成绩、展现领导力和环保理念、强调社区服务经历来提升录取机会。
+
+Havergal College是备选学校，匹配度88%。该校的全人教育理念与张小明的全面发展目标契合，艺术项目丰富，STEM与人文并重，环保理念与学校价值观一致。虽然单性别环境需要适应期，但张小明可以强调全面发展，展现艺术才能，突出环保理念和社区服务，展现女性领导力潜质。
+
+St. Andrew's College也是备选学校，匹配度85%。该校的传统价值观与家庭背景匹配，体育项目丰富，重视品格教育，师生关系密切，个性化关注。虽然STEM项目相对较弱，地理位置较远，但张小明可以强调传统价值观和品格教育，展现体育才能和团队精神，突出学习能力和适应能力。
+
+学术与课外准备
+
+在学术准备方面，张小明需要加强英语写作能力，保持STEM优势，准备AP课程。他的SSAT目标应该达到90th percentile以上，TOEFL目标100+。在课外活动方面，他应该参与更多STEM竞赛，发展领导力，深化环保项目。语言方面，他需要加强英语口语和写作，学习法语基础。技能发展方面，他应该提升编程技能，进阶机器人制作，扩展环保项目。
+
+申请流程与个性化策略
+
+申请时间线包括：2024年10月完成SSAT考试，2024年11月提交申请材料，2024年12月参加面试，2025年1月等待录取结果。关键里程碑包括材料准备完成、面试准备就绪、最终提交、录取结果确认。
+
+在文书方面，张小明应该突出领导力经历（环保社团创始和组织）、STEM兴趣发展（机器人竞赛和APP开发）、社区服务贡献（义卖活动和志愿服务）。推荐信策略是来自指导老师、社团负责人和社区服务组织。面试准备应该突出环保义卖活动经验，展现STEM专长和领导力。作品集应该包括环保义卖活动照片和报道、垃圾分类APP演示、机器人竞赛获奖证书、志愿服务证明。
+
+录取后延伸建议
+
+录取后，张小明应该提前了解学校文化和环境，参加新生orientation。在学术规划方面，他应该准备学术衔接，选择适合的课程和项目。在社交方面，他应该建立社交网络，参与学校社团和活动。长期目标是为大学申请做准备，继续发展STEM专长。"""
+    
+    def generate_report_content(self, data: Dict[str, Any], prompt: str) -> str:
+        """根据输入数据生成报告内容"""
+        # 提取学生信息
+        student = data.get("student", {})
+        family = data.get("family", {})
+        matching = data.get("matching", {})
+        plans = data.get("plans", {})
+        timeline = data.get("timeline", {})
+        tests = data.get("tests", {})
+        essays_refs_interview = data.get("essays_refs_interview", {})
+        post_offer = data.get("post_offer", {})
+        
+        # 构建报告内容
+        content = f"""家庭与学生背景
+
+{student.get('name', '学生')}同学现年{student.get('age', '14岁')}，就读于{student.get('grade', 'Grade 8')}，在学术方面表现优异，GPA达到{student.get('gpa', '3.9/4.0')}。他在{student.get('academic_strengths', '数学、物理、计算机科学')}方面展现出显著优势，特别是在STEM领域有着浓厚的兴趣和扎实的基础。在竞赛方面，他获得了{student.get('competition_achievements', '机器人竞赛省级二等奖')}，这些成就充分体现了他在学术方面的实力和潜力。
+
+在领导力方面，{student.get('name', '学生')}担任{student.get('leadership_positions', '学生会科技部副部长')}，展现出了出色的组织能力和服务意识。他的{student.get('project_experiences', '环保义卖活动')}不仅体现了他的技术能力，更展现了他对环保事业的热情和社会责任感。
+
+家庭方面，家长{family.get('education_values', '重视全人教育，希望培养孩子的独立思考和创新能力')}。家庭的教育理念是{family.get('culture', '中西文化融合，既重视传统价值观，也注重现代教育理念')}。家长{family.get('support_level', '全力支持孩子的教育发展')}，希望孩子能在国际化环境中全面发展，成为有责任感的未来领导者。
+
+学校申请定位
+
+基于{student.get('name', '学生')}同学的学术优势、领导力潜质和环保理念，我们建议他申请重视STEM教育、全人发展和环保理念的私立学校。目标学校应该能够支持他在机器人、编程和环保项目方面的兴趣发展，同时提供良好的学术环境和领导力培养机会。
+
+多伦多地区的私立学校是理想的选择，这些学校不仅学术水平高，而且重视学生的全面发展。预算方面，家庭可以承担中等偏上的学费水平，这为选择优质学校提供了保障。
+
+学生—学校匹配度
+
+"""
+        
+        # 添加学校匹配度信息
+        schools = matching.get("schools", [])
+        for school in schools:
+            school_name = school.get("name", "目标学校")
+            match_percentage = school.get("match_percentage", 85)
+            advantages = school.get("advantages", [])
+            challenges = school.get("challenges", [])
+            strategies = school.get("strategies", [])
+            
+            content += f"""{school_name}是{student.get('name', '学生')}同学的目标学校，匹配度达到{match_percentage}%。该校的{', '.join(advantages[:2])}，与{student.get('name', '学生')}在{student.get('academic_strengths', 'STEM')}方面的成就高度匹配。虽然{', '.join(challenges[:2])}，但{student.get('name', '学生')}可以通过{', '.join(strategies[:2])}来提升录取机会。
+
+"""
+        
+        # 添加其他章节
+        content += f"""学术与课外准备
+
+在学术准备方面，{student.get('name', '学生')}需要{plans.get('academic_preparation', '加强英语写作能力，保持STEM优势')}。他的{plans.get('test_preparation', 'SSAT目标90th percentile以上')}。在课外活动方面，他应该{plans.get('extracurricular_preparation', '参与更多STEM竞赛，发展领导力')}。
+
+申请流程与个性化策略
+
+申请时间线包括：{', '.join(timeline.get('deadlines', ['10月完成SSAT考试', '11月提交申请材料']))}。关键里程碑包括{', '.join(timeline.get('milestones', ['材料准备完成', '面试准备就绪']))}。
+
+在文书方面，{student.get('name', '学生')}应该突出{', '.join(essays_refs_interview.get('essay_themes', ['领导力经历', 'STEM兴趣发展']))}。推荐信策略是{essays_refs_interview.get('recommendation_strategy', '来自指导老师和社团负责人')}。面试准备应该{essays_refs_interview.get('interview_preparation', '突出环保义卖活动经验，展现STEM专长和领导力')}。
+
+录取后延伸建议
+
+录取后，{student.get('name', '学生')}应该{post_offer.get('transition_preparation', '提前了解学校文化和环境')}。在学术规划方面，他应该{post_offer.get('academic_planning', '准备学术衔接，选择适合的课程和项目')}。在社交方面，他应该{post_offer.get('social_networking', '建立社交网络，参与学校社团和活动')}。长期目标是为大学申请做准备，继续发展STEM专长。"""
+        
+        return content
     
     def call_llm(self, role_name: str, system_prompt: str, payload: Dict[str, Any]) -> Union[Dict[str, Any], str]:
         """统一的LLM调用接口"""
