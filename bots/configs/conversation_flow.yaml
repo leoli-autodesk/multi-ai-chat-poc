@@ -1,0 +1,102 @@
+# 对话流程配置文件
+# 定义bot的发言顺序和轮次管理
+
+# 流程名称和描述
+name: "私校申请顾问AI协作流程"
+description: "多轮对话流程，每轮包含所有bot发言"
+
+# 轮次配置
+rounds:
+  max_rounds: 10  # 最大轮次数
+  min_rounds: 1   # 最小轮次数
+  auto_end_conditions:
+    - "所有需要的信息已收集完毕"
+    - "达到最大轮次"
+    - "连续3轮无新信息"
+
+# 每轮发言顺序（固定顺序）
+speaking_order:
+  - "admissions_officer"  # 1. 招生官提问
+  - "advisor"             # 2. 顾问分析问题意图并提供建议
+  - "student"             # 3. 学生回答
+  - "parent"              # 4. 家长回答
+
+# 特殊角色处理
+special_roles:
+  writer:
+    trigger: "对话结束时"
+    condition: "所有轮次完成或信息收集完毕"
+    position: "最后"
+
+# 上下文隔离规则
+context_isolation:
+  admissions_officer:
+    visible_roles: ["parent", "student"]
+    hidden_roles: ["advisor", "writer"]
+    reason: "招生官不应该看到顾问的建议，保持客观评估"
+  
+  parent:
+    visible_roles: ["admissions_officer", "parent", "student", "advisor"]
+    hidden_roles: ["writer"]
+  
+  student:
+    visible_roles: ["admissions_officer", "parent", "student", "advisor"]
+    hidden_roles: ["writer"]
+  
+  advisor:
+    visible_roles: ["admissions_officer", "parent", "student", "advisor"]
+    hidden_roles: ["writer"]
+  
+  writer:
+    visible_roles: ["admissions_officer", "parent", "student", "advisor"]
+    hidden_roles: []
+
+# 轮次结束条件
+round_end_conditions:
+  - condition: "所有speaking_order中的角色都已发言"
+    action: "进入下一轮"
+  
+  - condition: "advisor的asks_to_user为空"
+    action: "考虑结束对话"
+  
+  - condition: "达到max_rounds"
+    action: "强制结束对话"
+
+# 对话结束条件
+conversation_end_conditions:
+  - condition: "所有needed_info已收集完毕"
+    action: "生成最终报告"
+  
+  - condition: "达到max_rounds"
+    action: "生成最终报告"
+  
+  - condition: "连续3轮无新信息"
+    action: "生成最终报告"
+
+# 错误处理
+error_handling:
+  bot_failure:
+    action: "重试1次，失败则跳过该bot"
+    fallback: "使用默认响应"
+  
+  timeout:
+    action: "终止当前轮次"
+    timeout_seconds: 30
+  
+  context_error:
+    action: "使用隔离前的完整上下文"
+
+# 日志配置
+logging:
+  enabled: true
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  realtime: true
+  file_output: true
+  console_output: true
+
+# 性能配置
+performance:
+  max_content_length: 300
+  response_timeout: 30
+  retry_attempts: 3
+  retry_delay: 1.0

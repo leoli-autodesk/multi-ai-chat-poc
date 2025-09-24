@@ -1,0 +1,94 @@
+# 学校数据配置
+
+schools:
+  Upper Canada College:
+    type: "顶级私立男校"
+    features: "学术卓越，领导力培养，国际化教育"
+    requirements:
+      academic: "SSAT 85th percentile以上"
+      specialty: "多元化才能，领导力潜质"
+      interview: "综合素质、英语表达能力"
+    philosophy: "培养未来领导者，全面发展"
+    strengths: ["学术", "领导力", "体育", "艺术", "社区服务"]
+    culture: "严谨、创新、包容、卓越"
+    tuition: "$50,000-60,000/年"
+    location: "多伦多"
+    
+  Havergal College:
+    type: "顶级私立女校"
+    features: "学术卓越，女性领导力，STEM教育强"
+    requirements:
+      academic: "SSAT 80th percentile以上"
+      specialty: "学术成就，领导力，社区服务"
+      interview: "英语流利，综合素质"
+    philosophy: "培养独立自信的女性领导者"
+    strengths: ["学术", "STEM", "艺术", "体育", "领导力"]
+    culture: "创新、独立、自信、服务"
+    tuition: "$45,000-55,000/年"
+    location: "多伦多"
+    
+  St. Andrew's College:
+    type: "顶级私立男校"
+    features: "学术卓越，体育强项，寄宿教育"
+    requirements:
+      academic: "SSAT 80th percentile以上"
+      specialty: "体育特长，学术成就"
+      interview: "英语能力，适应能力"
+    philosophy: "全面发展，品格培养"
+    strengths: ["学术", "体育", "艺术", "寄宿教育"]
+    culture: "传统、卓越、团队精神"
+    tuition: "$55,000-65,000/年"
+    location: "多伦多"
+    
+  Crescent School:
+    type: "顶级私立男校"
+    features: "学术卓越，创新教育，STEM强项"
+    requirements:
+      academic: "SSAT 85th percentile以上"
+      specialty: "学术成就，创新思维"
+      interview: "英语流利，学习能力"
+    philosophy: "培养创新思维，全面发展"
+    strengths: ["学术", "STEM", "创新", "领导力"]
+    culture: "创新、卓越、合作"
+    tuition: "$50,000-60,000/年"
+    location: "多伦多"
+
+# 学校匹配度分析
+matching:
+  academic:
+    strong_academic: ["Upper Canada College", "Havergal College", "Crescent School", "St. Andrew's College"]
+    stem_focused: ["Crescent School", "Havergal College", "Upper Canada College"]
+    comprehensive: ["Upper Canada College", "Havergal College", "St. Andrew's College"]
+  
+  specialty:
+    leadership: ["Upper Canada College", "Havergal College", "Crescent School"]
+    arts: ["Havergal College", "Upper Canada College", "St. Andrew's College"]
+    sports: ["St. Andrew's College", "Upper Canada College", "Havergal College"]
+    stem: ["Crescent School", "Havergal College", "Upper Canada College"]
+  
+  personality:
+    introverted: ["Crescent School", "Upper Canada College", "Havergal College"]
+    extroverted: ["St. Andrew's College", "Upper Canada College", "Havergal College"]
+    innovative: ["Crescent School", "Havergal College", "Upper Canada College"]
+
+# 申请策略建议
+strategy:
+  Upper Canada College:
+    advantages: "学术卓越，领导力培养，国际化程度高"
+    challenges: "竞争激烈，需要突出领导力和学术能力"
+    suggestions: "准备SSAT高分，突出领导力经历，加强英语表达"
+  
+  Havergal College:
+    advantages: "学术卓越，女性领导力，STEM教育强"
+    challenges: "需要综合素质，英语要求高"
+    suggestions: "提升英语水平，发展STEM兴趣，突出领导力"
+  
+  St. Andrew's College:
+    advantages: "学术卓越，体育强项，寄宿教育"
+    challenges: "需要体育特长，适应寄宿生活"
+    suggestions: "发展体育特长，准备寄宿适应，加强学术"
+  
+  Crescent School:
+    advantages: "学术卓越，创新教育，STEM强项"
+    challenges: "需要创新思维，学术要求高"
+    suggestions: "准备创新项目，加强STEM能力，提升学术成绩"
